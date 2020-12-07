@@ -2,6 +2,7 @@ defmodule Day7.Test do
   use ExUnit.Case
   alias Day7.Input
 
+  @tag :skip
   test "example 1" do
     example_rules = %{
       "light red" => [{1, "bright white"}, {2, "muted yellow"}],
@@ -19,7 +20,7 @@ defmodule Day7.Test do
     assert result == 4
   end
 
-  # @tag :skip
+  @tag :skip
   test "real input 1" do
     colors = Day7.colors_that_may_contain(Input.rules, "shiny gold")
     IO.inspect {:colors, colors}
