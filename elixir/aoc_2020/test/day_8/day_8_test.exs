@@ -36,6 +36,34 @@ defmodule Day8.Test do
     assert mem[:acc] == 8
   end
 
+  test "swap at position" do
+    example = [
+      nop: +0,
+      acc: +1,
+      jmp: +4,
+      acc: +3,
+      jmp: -3,
+      acc: -99,
+      acc: +1,
+      jmp: -4,
+      acc: +6,
+    ]
+
+    expected = [
+      nop: +0,
+      acc: +1,
+      jmp: +4,
+      acc: +3,
+      jmp: -3,
+      acc: -99,
+      acc: +1,
+      nop: -4,
+      acc: +6,
+    ]
+
+    assert expected == Day8.swap_at(example, 7)
+  end
+
   @tag :skip
   test "real input 1" do
     {:infinite_loop, mem} = Day8.acc_value_before_looping(Input.code)
@@ -44,7 +72,8 @@ defmodule Day8.Test do
 
   @tag :skip
   test "real input 2" do
-    result = :todo
-    IO.inspect({:day_8_answer_2, result})
+    {:ok, swap_at, mem} = Day8.find_program_that_ends_normally(Input.code)
+    IO.inspect(swap_at, label: "Swapped instruction at")
+    IO.inspect(mem[:acc], label: "Day 8 answer 2")
   end
 end
