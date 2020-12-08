@@ -15,8 +15,8 @@ defmodule Day8.Test do
       acc: +6,
     ]
 
-    result = Day8.acc_value_before_looping(example)
-    assert result == 5
+    {:infinite_loop, mem} = Day8.acc_value_before_looping(example)
+    assert mem[:acc] == 5
   end
 
   test "example 2" do
@@ -32,13 +32,14 @@ defmodule Day8.Test do
       acc: +6,
     ]
 
-    result = Day8.acc_value_before_looping(example)
-    assert result == 8
+    {:end, mem} = Day8.acc_value_before_looping(example)
+    assert mem[:acc] == 8
   end
 
+  @tag :skip
   test "real input 1" do
-    result = Day8.acc_value_before_looping(Input.code)
-    IO.inspect({:day_8_answer_1, result})
+    {:infinite_loop, mem} = Day8.acc_value_before_looping(Input.code)
+    IO.inspect(mem[:acc], label: "Day 8 answer 1")
   end
 
   @tag :skip
