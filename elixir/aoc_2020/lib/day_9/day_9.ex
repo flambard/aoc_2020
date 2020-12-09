@@ -2,7 +2,7 @@ defmodule Day9 do
   def find_invalid(numbers, preamble_length) do
     case Enum.split(numbers, preamble_length) do
       {_, []} -> :not_found
-      {preamble, [number | rest]} ->
+      {preamble, [number | _]} ->
         case find_pairs(number, preamble) do
           [] -> {:ok, number}
           _  ->
@@ -20,7 +20,7 @@ defmodule Day9 do
 
   def find_weakness(numbers, number) do
     case find_contiguous_set(numbers, number) do
-      :not_found -> :fail
+      :not_found -> :not_found
       {:ok, set} ->
         sorted = Enum.sort(set)
         {:ok, hd(sorted) + List.last(sorted)}
@@ -28,7 +28,7 @@ defmodule Day9 do
   end
 
   def find_contiguous_set([], _) do
-    :fail
+    :not_found
   end
 
   def find_contiguous_set(numbers = [_ | rest], number) do
