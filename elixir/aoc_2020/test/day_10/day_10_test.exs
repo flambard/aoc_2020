@@ -1,4 +1,4 @@
- defmodule Day10.Test do
+defmodule Day10.Test do
   use ExUnit.Case
   alias Day10.Input
 
@@ -24,10 +24,32 @@
   @tag :skip
   test "example 2" do
     example = [
+      16,
+      10,
+      15,
+      5,
+      1,
+      11,
+      7,
+      19,
+      6,
+      12,
+      4
     ]
 
-    result = :todo
-    assert result == :todo
+    result = Day10.count_possible_arrangements(example)
+    assert result == 8
+  end
+
+  test "collect choices" do
+    choices = Day10.possible_adapter_choices([4, 5, 6], 2)
+    assert MapSet.new(choices) == MapSet.new([{4, [5, 6]}, {5, [6]}])
+    assert Day10.possible_adapter_choices([4], 2) == [{4, []}]
+    assert Day10.possible_adapter_choices([], 2) == []
+  end
+
+  test "collect choices bug" do
+    Day10.possible_adapter_choices([10, 11, 12, 15, 16, 19], 12)
   end
 
   @tag :skip
@@ -40,7 +62,7 @@
 
   @tag :skip
   test "real input 2" do
-    result = :todo
+    result = Day10.count_possible_arrangements(Input.adapters)
     IO.inspect(result, label: "Day 10 answer 2")
   end
 end
