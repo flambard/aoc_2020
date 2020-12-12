@@ -19,11 +19,21 @@ defmodule Day11.SeatMap do
       seat == ?L,
       into: MapSet.new(),
       do: {h, w}
-    %{seat_map | empty: empty_seats}
+    occupied_seats =
+    for {row, h} <- Enum.with_index(input),
+      {seat, w} <- Enum.with_index(row),
+      seat == ?\#,
+      into: MapSet.new(),
+      do: {h, w}
+    %{seat_map | empty: empty_seats, occupied: occupied_seats}
   end
 
   def occupied?(seat, seat_map) do
     Enum.member?(seat_map.occupied, seat)
+  end
+
+  def empty?(seat, seat_map) do
+    Enum.member?(seat_map.empty, seat)
   end
 
   def add_empty_seat(seat_map, seat) do
