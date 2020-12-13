@@ -35,7 +35,7 @@ defmodule Day12.Test do
   @tag :skip
   test "real input 1" do
     ship_start = Day12.new_ship()
-    ship_end = Day12.do_actions(ship_start, Day12.Input.actions)
+    ship_end = Day12.do_actions(ship_start, Input.actions)
     result = Day12.manhattan_distance(ship_start, ship_end)
     IO.inspect(result, label: "Day 12 answer 1")
   end
@@ -43,7 +43,7 @@ defmodule Day12.Test do
   @tag :skip
   test "real input 2" do
     ship_start = Day12.new_ship()
-    ship_end = Day12.do_actions_with_waypoint(ship_start, Day12.Input.actions)
+    ship_end = Day12.do_actions_with_waypoint(ship_start, Input.actions)
     result = Day12.manhattan_distance(ship_start, ship_end)
     IO.inspect(result, label: "Day 12 answer 2")
   end
